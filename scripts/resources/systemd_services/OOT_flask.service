@@ -1,0 +1,12 @@
+[Unit]
+Description=OOT Flask server
+After=networking.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/oot/STRIDR/comms
+ExecStart=/usr/bin/python3 -u /home/oot/STRIDR/comms/flask_interface.py
+
+[Install]
+WantedBy=multi-user.target
+

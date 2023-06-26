@@ -1,0 +1,45 @@
+System level messages
+=====================
+\x00 - spam.SPAM - removed in dev, \x00 appears in the system status so don't use for anything else
+\x01 - RandomSample.RandomSample - leave alone, but it's never imported or used, but \x01 is probably going to show up in a packet someplace...
+
+Mode Zero - Low Level Processing
+================================
+\x10 - mode_zero.Mean_Var
+\x11 - mode_zero.Co_Var
+\x12 - mode_zero.Polynomial_Fits
+\x13 - fourier_interp.Fourier_Interp
+
+Camera
+======
+\x20 - Image_Clouds
+\x25 - Running_Light_Detector, needs to change
+
+Waves, IMU
+==========
+\x31 - ReadWaves.Read_Waves
+\x32 - ReadSpectrum.Read_Spectrum
+\x35 - M~
+
+Microphone
+==========
+\x71 - microphoneAnalysis.microphoneEnvironment
+\x75 - D~
+\x77 - microphoneAnalysis.microphoneDetection
+
+Hydrophone
+==========
+\x81 - hydrophoneAnalysis.hydrophoneEnvironment
+\x87 - hydrophoneAnalysis.hydrophoneDetection
+\x88 - hydrophoneAnalysis.hydrophonePrection
+
+Compression
+===========
+\x91 - mode_zero.Zip_Compress
+
+Unused
+======
+\x12 - TA2_wrappers.D~, byteID is set as 0x12, pulls data from user folder so probably safe to delete
+
+
+

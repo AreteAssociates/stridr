@@ -1,0 +1,10 @@
+[Unit]
+Description=OOT - Extends BB operating period
+After=OOT_MSP.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -u /home/oot/STRIDR/scripts/extend_timer_then_shutdown.py
+
+[Install]
+WantedBy=multi-user.target

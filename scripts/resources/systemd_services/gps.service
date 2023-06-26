@@ -1,0 +1,8 @@
+[Unit]
+Description=GPS (Global Positioning System) Daemon
+After=local-fs.service
+[Service]
+# the -n -r flags tell gpsd to not wait for the GPS and to use the GPS time even if no position fix if available
+ExecStart=/opt/gpsd/gpsd -n -N /dev/ttyS1
+[Install]
+WantedBy=multi-user.target

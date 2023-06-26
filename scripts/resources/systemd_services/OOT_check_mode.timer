@@ -1,0 +1,11 @@
+[Unit]
+Description=5min timer to check latch status and change mode
+
+[Timer]
+OnBootSec=0min
+OnUnitActiveSec=5min
+Unit=OOT_check_mode.service
+
+[Install]
+WantedBy=basic.target  
+

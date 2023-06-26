@@ -1,0 +1,12 @@
+[Unit]
+Description=OOT acquire data, used during startup mode before latch enabled
+After=local-fs.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/oot/STRIDR/scripts
+ExecStart=/usr/bin/python3 -u /home/oot/STRIDR/services/daq_manager/acquire_data.py
+
+[Install]
+WantedBy=gps.service
+

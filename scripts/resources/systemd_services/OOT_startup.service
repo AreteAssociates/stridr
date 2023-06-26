@@ -1,0 +1,12 @@
+[Unit]
+Description=OOT Startup Scripts. Manages boot modes, port configs.
+After=gps.service
+
+[Service]
+Type=simple
+WorkingDirectory=/home/oot/STRIDR/scripts
+ExecStart=/usr/bin/python3 -u /home/oot/STRIDR/scripts/OOT_start.py
+
+[Install]
+WantedBy=OOT_acquire_data.service
+

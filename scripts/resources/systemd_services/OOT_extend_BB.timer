@@ -1,0 +1,10 @@
+[Unit]
+Description=4min timer for BB_EXTEND timer
+
+[Timer]
+OnBootSec=4min
+OnUnitActiveSec=4min
+Unit=OOT_extend_BB.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=15min timer
+
+[Timer]
+OnBootSec=0min
+OnUnitActiveSec=15min
+Unit=OOT_acquire_data.service
+
+[Install]
+WantedBy=basic.target  
+

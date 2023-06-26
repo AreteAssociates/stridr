@@ -1,0 +1,78 @@
+PRAGMA foreign_keys=OFF;
+BEGIN TRANSACTION;
+CREATE TABLE `PowerSwitches` (
+        `ID`    INTEGER,
+        `Name`  INTEGER,
+        `GPIO`  INTEGER
+);
+INSERT INTO "PowerSwitches" VALUES(1,'P3V3',NULL);
+INSERT INTO "PowerSwitches" VALUES(2,'P5V0',NULL);
+INSERT INTO "PowerSwitches" VALUES(3,'P3V3_SW','P7.4');
+INSERT INTO "PowerSwitches" VALUES(4,'P3V3_RF','P7.2');
+INSERT INTO "PowerSwitches" VALUES(5,'P5V0_SW','P7.3');
+INSERT INTO "PowerSwitches" VALUES(6,'P5V0_C','P6.6');
+INSERT INTO "PowerSwitches" VALUES(7,'VBAT_SW','P6.7');
+CREATE TABLE IF NOT EXISTS "Sensor_Types" (
+        `ID`    INTEGER,
+        `HW_ID` INTEGER,
+        `Sensor_Name`   INTEGER,
+        `Channel_Name`  INTEGER,
+        `Raw`   INTEGER
+);
+INSERT INTO "Sensor_Types" VALUES(11,10,'IMU','AX',1);
+INSERT INTO "Sensor_Types" VALUES(12,10,'IMU','AY',1);
+INSERT INTO "Sensor_Types" VALUES(13,10,'IMU','AZ',1);
+INSERT INTO "Sensor_Types" VALUES(14,10,'IMU','MX',1);
+INSERT INTO "Sensor_Types" VALUES(15,10,'IMU','MY',1);
+INSERT INTO "Sensor_Types" VALUES(16,10,'IMU','MZ',1);
+INSERT INTO "Sensor_Types" VALUES(17,10,'IMU','GX',1);
+INSERT INTO "Sensor_Types" VALUES(18,10,'IMU','GY',1);
+INSERT INTO "Sensor_Types" VALUES(19,10,'IMU','GZ',1);
+INSERT INTO "Sensor_Types" VALUES(21,20,'GPS','Position',1);
+INSERT INTO "Sensor_Types" VALUES(31,30,'T/P','Air Temperature',1);
+INSERT INTO "Sensor_Types" VALUES(32,30,'T/P','Air Pressure',1);
+INSERT INTO "Sensor_Types" VALUES(51,50,'Camera','Camera',1);
+INSERT INTO "Sensor_Types" VALUES(61,60,'Audio','Audio',1);
+INSERT INTO "Sensor_Types" VALUES(71,70,'SST','SST',1);
+INSERT INTO "Sensor_Types" VALUES(81,80,'Conductivity','Conductivity',1);
+CREATE TABLE IF NOT EXISTS "HW_Config" (
+        `ID`    INTEGER,
+        `Function`      TEXT,
+        `IC`    TEXT,
+        `Bus`   TEXT,
+        `DeviceAddr`    INTEGER,
+        `Enabled`       INTEGER,
+        `Schedule`      INTEGER,
+        `RunTime`       INTEGER,
+        `Rate`  INTEGER,
+        `PowerSwitch`   INTEGER,
+        `AcquireProcess`        TEXT,
+	`AcquirePriority`	INTEGER,
+        `DataPath`      TEXT,
+        PRIMARY KEY(`ID`)
+);
+INSERT INTO "HW_Config" VALUES(0,'Main Processor','OSD3358',NULL,NULL,1,15,300,NULL,5,NULL,NULL,NULL);
+INSERT INTO "HW_Config" VALUES(1,'SATCOM','Iridium 9602','/dev/ttyS2',NULL,1,15,0,NULL,5,NULL,NULL,NULL);
+INSERT INTO "HW_Config" VALUES(2,'Solar Charger','ACT2861','/dev/i2c1',24,1,15,15,1,7,'charger/log_charger.py',NULL,'charger');
+INSERT INTO "HW_Config" VALUES(9,'Analysis Code',NULL,NULL,NULL,1,15,300,NULL,5,'../comms/comms_main.py',NULL,NULL);
+INSERT INTO "HW_Config" VALUES(10,'IMU','MPU9250','/dev/i2c1',68,1,15,180,6,1,'imu/mpu_logger/mpu_logger',-10,'imu');
+INSERT INTO "HW_Config" VALUES(20,'GPS','MAX-M8Q','/dev/ttyS1',NULL,1,15,30,NULL,1,'gps/store_gps.sh',NULL,'gps');
+INSERT INTO "HW_Config" VALUES(30,'Pressure','ICP-10110','/dev/i2c1',63,1,15,15,NULL,3,NULL,NULL,'surface');
+INSERT INTO "HW_Config" VALUES(50,'Video','Camera','/dev/video0',NULL,1,15,1,3,5,'camera/opencv_capture/capture_hdr',10,'camera');
+INSERT INTO "HW_Config" VALUES(60,'Audio','Audio','/dev/ttyS4',NULL,1,15,30,8000,5,'audio/acquire_audio',NULL,'audio');
+INSERT INTO "HW_Config" VALUES(70,'Temperature','SST','/sys/bus/w1/devices/28*/w1_slave',NULL,1,15,15,1,5,'temperature/onewire.py',NULL,'sst');
+INSERT INTO "HW_Config" VALUES(80,'Conductivity','Conductivity','/dev/ttyS4',NULL,1,15,15,1,6,'conductivity/log_condo.py',NULL,'conductivity');
+CREATE TABLE IF NOT EXISTS "Variables" (
+        `id`    INTEGER,
+        `key`   TEXT,
+        `value` TEXT,
+        `units` TEXT
+);
+INSERT INTO "Variables" VALUES(1,'PATH_ROOT_SENSOR_ACQ','/home/oot/STRIDR/sensors','path');
+INSERT INTO "Variables" VALUES(2,'PATH_ROOT_SENSOR_DATA','/home/oot/data','path');
+INSERT INTO "Variables" VALUES(3,'COMM_MAX_TRIES','10','tries');
+INSERT INTO "Variables" VALUES(4,'COMM_CNT_FAILED_MT','10','failures');
+INSERT INTO "Variables" VALUES(5,'COMM_LAST_SUCCESS','24','hours');
+INSERT INTO "Variables" VALUES(8,'GPS_LOCK_TIME_MAX','120','seconds');
+INSERT INTO "Variables" VALUES(9,'COMM_TRY_LIMIT_TIME','0','minutes');
+COMMIT;

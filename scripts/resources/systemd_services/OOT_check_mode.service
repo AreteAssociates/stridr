@@ -1,0 +1,11 @@
+[Unit]
+Description=OOT check mode - if latch is set, change to operational mode
+
+[Service]
+Type=oneshot
+WorkingDirectory=/home/oot/STRIDR/scripts
+ExecStart=/usr/bin/python3 -u -c "import OOT_start as OOT_start; OOT_start.check_latch_change_mode()"
+
+[Install]
+WantedBy=4minutes.timer
+
