@@ -4,6 +4,8 @@ Release Notes, STRIDR Release J
     - battery_scuttle
     - general_fail functionality
     - geofence and related functionality, as well as nearly everything scuttle-related
+    - support for certain sensors has been removed (RF, notably)
+    - partition encryption
 
 Release Notes, STRIDR Release I
 ===============================

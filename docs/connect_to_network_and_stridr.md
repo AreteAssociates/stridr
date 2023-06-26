@@ -1,21 +1,20 @@
-This note describes how to connect to the OOT network. OOT is a wireless network IT configured for us to enable development of the STRIDR program. It is really important that you disconnect the Ethernet plug from your computer prior to connecting to it. That means you won’t be able to check email at the same time (unless you use the VPN, I guess, not sure) as you are connected to an OOT device.
+The STRIDR devices attempt to connect to a wireless network on boot. They will connect to either an OOT or an OOT2 network if one is available. The devices will only connect when they are powered on, and will, within 3 minutes, typically power back off unless you do something to keep them awake.
 
-For your future reference, OOT is the DARPA program Oceans of Things that we worked on in 2019 for which we built 1500 STRIDR devices. A complete STRIDR is waterproofed in a round pressure vessel, has a glass top which protects the antennas and a few sensors, and 4 folding floats covered in solar panels. The floats are made of wood, which - I am not making this up - are cut and painted for us by the Amish.
+To set up an OOT network use the following settings:
+
+SSID:		OOT (or OOT2)
+Security:	WPA2
+Passphrase:	OOTProjectIn2019
 
 To connect to the OOT network:
-1.	Disconnect the Ethernet plug to the corporate network from your PC/laptop
-2.	Enable wifi
-3.	Connect to the SSID:   ```OOT```
-4.	Use the WPA2 password:  ```OOTProjectIn2019```
-5.	You are connected
+1.	Enable wifi
+2.	Connect to the SSID:   ```OOT```
+3.	Use the WPA2 password:  ```OOTProjectIn2019```
+4.	You are connected
 
-The OOT network appears to use 192.168.50.0/24. There are several devices on this network, I don’t know what they all are. STRIDR devices each use DHCP to obtain a new address, so occasionally they do change. The STRIDR_tools/wifi_tools/oot_ssh_status.py tool from the other repository can tell you the IP addresses of any OOT devices on the network. As of 19 February 2020, the debug unit on my desk can be found at:
+STRIDR devices each use DHCP to obtain a new address, so occasionally they do change. The STRIDR_tools/wifi_tools/oot_ssh_status.py tool from the other repository can tell you the IP addresses of any OOT devices on the network. 
 
-- 192.168.50.62
-- Username:    oot
-- Password:     Liberty1Witch
-
-If you can get on the device, just don’t reboot it. STRIDR is supposed to be an autonomous buoy which turns itself on and off on its own schedule. It’s configured to turn on every 15 minutes. If you do happen to reboot it, I can fix it later, just let me know. If you feel adventuresome, then go nuts, reboot it. You’ll want to connect immediately. From the time you hit enter after hitting reboot, it should take 40-60 seconds to be available on the network again, and hopefully at the same IP address. Log in and immediately run the following command:
+STRIDR is supposed to be an autonomous buoy which turns itself on and off on its own schedule. It’s configured to turn on every 15 minutes. You’ll want to connect immediately after it boots. It takes 40-60 seconds from power on to be available on the network again, and hopefully at the same IP address. Log in and immediately run the following command:
 
 ```touch /tmp/debug_stay_awake```
 

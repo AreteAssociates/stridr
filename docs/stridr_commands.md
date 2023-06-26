@@ -37,10 +37,6 @@ There are a number of files in /var which help understand what's going on.
 
 ```/var/fw_version``` contains the version of firmware currently programmed into the MSP430.
 
-```/var/last_comms_time``` is stamped with the last successful Iridium comms time. Once this is (typically) 24 hours old, the unit will scuttle.
-
-```/var/system_fail_count``` is the general_fail_counter. If this gets to 10, the unit will scuttle itself.
-
 Starting Over or Creating an Image
 ----------------------------------
 If you want to start from scratch on your unit, don't delete files or do anything by hand. You'll probably make a mistake which you'll regret, and subsequently won't be able to make anything work right. There is a tool which will repave the unit so that it is ready to run from scratch. This will allow you to create an image from this card, if desired, or just run the unit almost as though it has never run before.
@@ -63,6 +59,8 @@ Interacting with the Buzzer
 ```buzzkill``` will shut the damn buzzer off for a second. Some scuttle sources will turn it right back on. Best of luck.
 
 ```buzz``` will make your neighbors angry with you.
+
+See the notes below for how you can talk to the MSP yourself to turn the buzzer on and off manually. During development people were annoying me so I might have deleted these commands to share my frustration with others. I am only human and therefore flawed.
 
 Talking to the MSP430
 ---------------------

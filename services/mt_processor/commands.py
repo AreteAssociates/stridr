@@ -159,21 +159,6 @@ def comms_set_quiet_period(args):
 def comms_configure(args):
     print('comms set quiet period.  {}'.format(args))
 
-def configure_rf_settings(args):
-    xband_threshold = int(args[0][0])
-    xband_hysteresis = int(args[0][1])
-    ais_threshold = int(args[0][2])
-    ais_hysteresis = int(args[0][3])
-
-    conn = connect_to_db(CONFIG_DB)
-    c = conn.cursor()
-    c.execute('UPDATE Variables SET value = "{}" WHERE key = "RF_XBAND_HYSTERESIS";'.format(xband_hysteresis))
-    c.execute('UPDATE Variables SET value = "{}" WHERE key = "RF_XBAND_THRESHOLD";'.format(xband_threshold))
-    c.execute('UPDATE Variables SET value = "{}" WHERE key = "RF_AIS_HYSTERESIS";'.format(ais_hysteresis))
-    c.execute('UPDATE Variables SET value = "{}" WHERE key = "RF_AIS_THRESHOLD";'.format(ais_threshold))
-    commit_db(conn)
-    return
-
 def update_db(args):
     if args is None: return
     args = args[0] # strip incoming list format

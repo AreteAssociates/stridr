@@ -9,8 +9,14 @@ First, this depends strongly on how the data is acquired. The multiple approache
 
 Iridium SBD Receiver
 --------------------
-This will not run on the Arete network because it requires an open port to the outside world. It is
+This will not run on the company network because it requires an open port to the outside world. It is
 called directip and runs either on its own or in a Docker container.
+
+These notes reference a directip server from https://github.com/castelao/iridiumSBD.git
+
+Note that this implementation has changed from a python one (available years ago) to a rust one, which
+is a lot different, probably works better, and is what is currently hosted at that git repo. References
+to Docker are what I was running locally to keep the server running.
 
 The files are named in a consistent convention in the format (something like, I probably got the
 format characters wrong) %Y%M%D%h%m%s-imei-message_order.sbd
@@ -70,7 +76,7 @@ will have an easier time repeating this, and should document a little better nex
 these notes.
 
 1. Clone the STRIDR repo
-```git clone https://bitbucket.corp.arete.com:8443/scm/~jfriel/stridr.git```
+```git clone ihttps://github.com/AreteAssociates/stridr.git```
 2. For some reason stridr wants to be STRIDR so make a link. This command might be backwards, I do
 that sometimes.
 ```ln -s STRIDR stridr```

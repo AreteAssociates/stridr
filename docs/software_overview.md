@@ -27,10 +27,6 @@ OOT_startup is run by systemd at boot. It contains three major states, and perfo
     - Sets battery charge voltage back down
     - Shuts down
 
-OOT_startup - general_fail_counter
-----------------------------------
-Wrapped around all of this in OOT_startup is a "general fail counter." If any of this doesn't work right and an exception is caught, the general fail counter will increment. If OOT_startup completes without an exception, the counter is cleared. If the counter reaches 10 (which requires 10 full power on/off cycles, usually this should take 15*10 minutes if the MSP is controlling the timing) the device will SCUTTLE.
-
 OOT_startup - check_latch_change_mode
 -------------------------------------
 check_latch_change_mode is a function which is triggered every 5 minutes by the systemd OOT_check_mode.timer. 
@@ -46,8 +42,6 @@ LEDs are mostly driven by code in OOT_startup. There are several LED states. The
 - During first_boot (manufacturing test)
     - Yellow = occurs for around 1 second after turning on power
     - Green = received GPS position and time data correctly
-    - Blue = received Iridium signal
-    - Green + Blue = both of the above
     - Red heartbeat = BB is running
     - 3 beeps + very slowly blinking blue LED = successful first boot, unit passes. Blue light remains on after BB powers itself down
     - Solid red LED = boot test fails (many potential causes)
@@ -55,8 +49,6 @@ LEDs are mostly driven by code in OOT_startup. There are several LED states. The
 - During normal boot
     - Yellow = occurs for around 1 second after turning on power
     - Green = received GPS position and time data correctly
-    - Blue = received Iridium signal and time data
-    - Green + Blue = both of the above
     - Red heartbeat = BB is running
     - Solid red LED = boot test fails (many potential causes)
 
@@ -65,6 +57,5 @@ LEDs are mostly driven by code in OOT_startup. There are several LED states. The
     - Red heartbeat continues, except during camera data acquisition (see camera DAQ code)
 
 - During other failures
-    - Flashing red and flashing green, unsynchronized (no blue) = general_fail event occurred; if this happens 10 times, unit will scuttle
     - Flashing red (50% duty cycle, no blue) = setup + data acquisition took less than 180 seconds, so probably something broke.
     
